@@ -21,26 +21,15 @@ variable "aws_region" {
   description = "The AWS region to deploy resources"
   type        = string
 }
+locals {
+  default = terraform.workspace
+}
 
 variable "vpc_name" {
   description = "Name of the VPC"
   type        = string
 }
 
-locals {
-  default = terraform.workspace
-}
-
-variable "region" {
-  description = "The AWS region to deploy resources in"
-  type        = string
-}
-
-
-variable "vpc_name" {
-  description = "The name of the VPC"
-  type        = string
-}
 
 
 # Variable for the VPC

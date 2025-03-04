@@ -24,46 +24,12 @@ resource "aws_vpc" "main" {
     Name = "main-vpc"
   }
 }
-
-resource "aws_subnet" "public" {
-  vpc_id                  = aws_vpc.main.id
-  cidr_block              = cidrsubnet(var.vpc_cidr, 8, 1)
-  map_public_ip_on_launch = true
-
-  tags = {
-    Name = "public-subnet"
-  }
-}
-
-resource "aws_subnet" "private" {
-  vpc_id     = aws_vpc.main.id
-  cidr_block = cidrsubnet(var.vpc_cidr, 8, 2)
-
-  tags = {
-    Name = "private-subnet"
-  }
-}
-
-resource "aws_subnet" "this" {
-  for_each = var.subnet_configs
-
-  vpc_id                  = aws_vpc.this.id
-  cidr_block              = each.value.cidr_block
-  availability_zone       = each.value.az
-  map_public_ip_on_launch = each.value.is_public
-}
-
 resource "aws_subnet" "subnets" {
-  for_each = var.subnet_configs
-
+  for_each                = { for subnet in var.subnets : subnet.name => subnet }
   vpc_id                  = aws_vpc.main.id
   cidr_block              = each.value.cidr_block
-  availability_zone       = each.value.az
-  map_public_ip_on_launch = each.value.is_public
-
-  tags = {
-    Name = each.key
-  }
+  map_public_ip_on_launch = each.value.type == "public" ? true : false
+  tags                    = { "Name" = each.value.name }
 }
 
 resource "aws_internet_gateway" "gw" {
