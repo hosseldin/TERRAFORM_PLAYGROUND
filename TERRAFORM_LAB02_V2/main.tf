@@ -27,14 +27,19 @@ module "security_group" {
   vpc_id = module.network.vpc_id
 }
 
+
 module "instance" {
-  source = "./modules/instance"
-
-  vpc_id            = module.network.vpc_id
-  security_group_id = module.security_group.security_group_id
-  public_subnet_id  = module.network.public_subnet_id
-
+  source    = "./modules/instance"
+  instances = var.instances
 }
+# module "instance" {
+#   source = "./modules/instance"
+
+#   vpc_id            = module.network.vpc_id
+#   security_group_id = module.security_group.security_group_id
+#   public_subnet_id  = module.network.public_subnet_id
+
+# }
 
 # ==============================================
 #
