@@ -18,20 +18,10 @@
 # ==============================================
 
 output "instance_ids" {
-<<<<<<< HEAD
-  value = aws_instance.instance[*].id
-=======
   value = aws_instance.instances[*].id
->>>>>>> ea8631a403d5a4e5e6039c69f42de322418f6aa7
 }
 
 
-
-
-<<<<<<< HEAD
-
-=======
->>>>>>> ea8631a403d5a4e5e6039c69f42de322418f6aa7
 # ==============================================
 #
 # ======= TERRAFORM IMPLEMENTATION END ========

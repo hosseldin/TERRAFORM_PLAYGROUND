@@ -16,17 +16,10 @@
 # ====== TERRAFORM IMPLEMENTATION START ======
 #
 # ==============================================
-<<<<<<< HEAD
+
 aws_region = "us-east-1"
 vpc_name   = "hosa-vpc-terraform"
 vpc_cidr   = "10.0.0.0/16"
-=======
-
-# Variable for the VPC
-region   = "us-east-1"
-vpc_name = "hosa-vpc-terraform"
-vpc_cidr = "10.0.0.0/16"
->>>>>>> ea8631a403d5a4e5e6039c69f42de322418f6aa7
 
 subnet_configs = {
   "public-subnet-1" = {
@@ -58,10 +51,6 @@ security_rules = [
   }
 ]
 
-<<<<<<< HEAD
-=======
-
->>>>>>> ea8631a403d5a4e5e6039c69f42de322418f6aa7
 instances = [
   {
     name          = "app-server-1"
@@ -72,7 +61,7 @@ instances = [
   }
 ]
 
-<<<<<<< HEAD
+
 ingress_rules = [
   {
     name        = "allow-all-ingress"
@@ -94,7 +83,7 @@ egress_rules = [
 ]
 
 
-=======
+
 # instances = [
 #   {
 #     name          = "app-server-1",
@@ -107,7 +96,7 @@ egress_rules = [
 #     instance_type = "t2.micro"
 #   }
 # ]
->>>>>>> ea8631a403d5a4e5e6039c69f42de322418f6aa7
+
 
 # ==============================================
 #

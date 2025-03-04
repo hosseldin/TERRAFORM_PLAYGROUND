@@ -17,7 +17,7 @@
 #
 # ==============================================
 
-<<<<<<< HEAD
+
 variable "instances" {
   type = list(object({
     name              = string
@@ -28,7 +28,7 @@ variable "instances" {
   }))
 }
 
-=======
+
 variable "subnet_ids" {
   description = "Mapping of subnet names to IDs"
   type        = map(string)
@@ -49,7 +49,7 @@ variable "instances" {
     security_name = string
   }))
 }
->>>>>>> ea8631a403d5a4e5e6039c69f42de322418f6aa7
+
 
 # ==============================================
 #

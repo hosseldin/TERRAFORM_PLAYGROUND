@@ -45,7 +45,6 @@ module "security_group" {
 module "instances" {
   source = "./modules/instance"
   instances = [
-<<<<<<< HEAD
     for instance in var.instances : {
       name              = instance.name
       ami               = instance.ami

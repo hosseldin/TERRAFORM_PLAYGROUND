@@ -41,11 +41,6 @@ resource "aws_security_group" "sg" {
   }
 }
 
-
-<<<<<<< HEAD
-
-=======
->>>>>>> ea8631a403d5a4e5e6039c69f42de322418f6aa7
 # ==============================================
 #
 # ======= TERRAFORM IMPLEMENTATION END ========

@@ -19,7 +19,6 @@
 
 resource "aws_vpc" "main" {
   cidr_block = var.vpc_cidr
-<<<<<<< HEAD
 
   tags = {
     Name = "main-vpc"
@@ -52,12 +51,6 @@ resource "aws_subnet" "this" {
   cidr_block              = each.value.cidr_block
   availability_zone       = each.value.az
   map_public_ip_on_launch = each.value.is_public
-}
-
-=======
-  tags = {
-    Name = var.vpc_name
-  }
 }
 
 resource "aws_subnet" "subnets" {
@@ -96,8 +89,6 @@ resource "aws_route_table_association" "public_assoc" {
   route_table_id = aws_route_table.public_rt.id
 }
 
-
->>>>>>> ea8631a403d5a4e5e6039c69f42de322418f6aa7
 # ==============================================
 #
 # ======= TERRAFORM IMPLEMENTATION END ========

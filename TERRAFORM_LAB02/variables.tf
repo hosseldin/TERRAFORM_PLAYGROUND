@@ -16,7 +16,7 @@
 # ====== TERRAFORM IMPLEMENTATION START ======
 #
 # ==============================================
-<<<<<<< HEAD
+
 variable "aws_region" {
   description = "The AWS region to deploy resources"
   type        = string
@@ -26,8 +26,6 @@ variable "vpc_name" {
   description = "Name of the VPC"
   type        = string
 }
-
-=======
 
 locals {
   default = terraform.workspace
@@ -46,20 +44,19 @@ variable "vpc_name" {
 
 
 # Variable for the VPC
->>>>>>> ea8631a403d5a4e5e6039c69f42de322418f6aa7
 variable "vpc_cidr" {
   description = "CIDR block for the VPC"
   type        = string
 }
 
-<<<<<<< HEAD
+
 variable "subnet_configs" {
   description = "Configuration for public and private subnets"
-=======
+}
 
 variable "subnet_configs" {
   description = "Subnet configurations (public and private)"
->>>>>>> ea8631a403d5a4e5e6039c69f42de322418f6aa7
+
   type = map(object({
     cidr_block = string
     az         = string
@@ -67,7 +64,7 @@ variable "subnet_configs" {
   }))
 }
 
-<<<<<<< HEAD
+
 variable "security_rules" {
   description = "List of security rules"
   type = list(object({
@@ -81,7 +78,7 @@ variable "security_rules" {
 
 variable "instances" {
   description = "List of EC2 instances"
-=======
+
 
 variable "security_rules" {
   description = "Security group rules"
@@ -104,7 +101,7 @@ variable "security_rules" {
 
 variable "instances" {
   description = "List of instances"
->>>>>>> ea8631a403d5a4e5e6039c69f42de322418f6aa7
+
   type = list(object({
     name          = string
     ami           = string
@@ -114,7 +111,7 @@ variable "instances" {
   }))
 }
 
-<<<<<<< HEAD
+
 variable "ingress_rules" {
   description = "List of ingress rules"
   type = list(object({
@@ -137,8 +134,6 @@ variable "egress_rules" {
   }))
 }
 
-=======
->>>>>>> ea8631a403d5a4e5e6039c69f42de322418f6aa7
 
 
 

@@ -22,8 +22,6 @@ variable "vpc_cidr" {
   description = "CIDR block for the VPC"
 }
 
-<<<<<<< HEAD
-=======
 variable "vpc_name" {}
 
 variable "subnet_configs" {
@@ -33,7 +31,7 @@ variable "subnet_configs" {
     is_public  = bool
   }))
 }
->>>>>>> ea8631a403d5a4e5e6039c69f42de322418f6aa7
+
 
 
 # ==============================================
