@@ -24,11 +24,12 @@ variable "vpc_cidr" {
 
 variable "vpc_name" {}
 
-variable "subnet_configs" {
-  type = map(object({
+variable "subnets" {
+  type = list(object({
+    name       = string
     cidr_block = string
+    type       = string
     az         = string
-    is_public  = bool
   }))
 }
 

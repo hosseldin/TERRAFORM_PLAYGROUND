@@ -34,7 +34,6 @@
 # variable "public_subnet_id" {
 #   type = string
 # }
-
 variable "instances" {
   type = list(object({
     ami_id            = string
