@@ -32,7 +32,8 @@ provider "aws" {
 }
 
 module "vpc" {
-  source = "./modules/vpc"
+  source  = "./modules/vpc"
+  subnets = var.subnets
 }
 
 module "security_group" {
@@ -44,9 +45,10 @@ module "instances" {
   source         = "./modules/instance"
   instances      = var.instances
   subnets        = module.vpc.subnets
-  security_group = module.security_group.security_group_id
+  security_group = module.security_group.pub-secgrp-id
   ami            = data.aws_ami.ubuntu
 }
+
 
 
 # ==============================================

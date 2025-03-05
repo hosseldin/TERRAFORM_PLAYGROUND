@@ -45,9 +45,10 @@ variable "subnets" {
 
 variable "instances" {
   type = list(object({
-    name   = string
-    subnet = string
-    type   = string
+    name     = string
+    subnet   = string
+    type     = string
+    security = string
   }))
 }
 
@@ -63,6 +64,25 @@ variable "security_rules" {
 }
 
 
+data "aws_ami" "ubuntu" {
+  most_recent = true
+  owners      = ["ubuntu"]
+
+  filter {
+    name   = "name"
+    values = ["ubuntu-ami-*-x86_64"]
+  }
+
+  filter {
+    name   = "root-device-type"
+    values = ["ebs"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+}
 
 # ==============================================
 #

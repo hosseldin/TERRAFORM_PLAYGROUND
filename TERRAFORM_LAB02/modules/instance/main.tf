@@ -20,10 +20,13 @@
 resource "aws_instance" "instance" {
   count = length(var.instances)
 
-  ami                    = var.instances[count.index].ami
-  instance_type          = var.instances[count.index].instance_type
-  subnet_id              = var.instances[count.index].subnet_id
-  vpc_security_group_ids = [var.instances[count.index].security_group_id]
+  ami           = var.ami.id
+  instance_type = var.instances[count.index].instance_type
+  subnet_id     = var.subnets["${var.instances[count.index].subnet}"].id
+  vpc_security_group_ids = [
+    var.instances[count.index].type == "public"
+    ? aws_security_group.public-sg.id
+  : aws_security_group.private-sg.id]
   tags = {
     Name = var.instances[count.index].name
   }

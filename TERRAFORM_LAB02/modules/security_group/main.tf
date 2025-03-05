@@ -17,30 +17,36 @@
 #
 # ==============================================
 
-resource "aws_security_group" "sg" {
+resource "aws_security_group" "public-sg" {
   vpc_id = var.vpc_id
+  name   = "Allow SSH"
+}
 
-  dynamic "ingress" {
-    for_each = var.ingress_rules
-    content {
-      from_port   = ingress.value.port
-      to_port     = ingress.value.port
-      protocol    = ingress.value.protocol
-      cidr_blocks = ingress.value.cidr_blocks
-    }
-  }
+resource "aws_vpc_security_group_ingress_rule" "pub_ssh_ipv4" {
+  security_group_id = aws_security_group.public-sg.id
+  cidr_ipv4         = "0.0.0.0/0"
+  from_port         = 22
+  ip_protocol       = "tcp"
+  to_port           = 22
+}
 
-  dynamic "egress" {
-    for_each = var.egress_rules
-    content {
-      from_port   = egress.value.port
-      to_port     = egress.value.port
-      protocol    = egress.value.protocol
-      cidr_blocks = egress.value.cidr_blocks
-    }
+resource "aws_security_group" "private-sg" {
+  name        = "allow ssh private"
+  description = "Allow ssh inbound traffic for only vpc cidr"
+  vpc_id      = aws_vpc.main.id
+
+  tags = {
+    Name = "allow_ssh_private"
   }
 }
 
+resource "aws_vpc_security_group_ingress_rule" "priv_ssh_ipv4" {
+  security_group_id = aws_security_group.private-sg.id
+  cidr_ipv4         = aws_vpc.main.cidr_block
+  from_port         = 22
+  ip_protocol       = "tcp"
+  to_port           = 22
+}
 # ==============================================
 #
 # ======= TERRAFORM IMPLEMENTATION END ========

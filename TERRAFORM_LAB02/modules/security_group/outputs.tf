@@ -17,12 +17,13 @@
 #
 # ==============================================
 
-output "security_group_id" {
-  value = aws_security_group.sg.id
+output "pub-secgrp-id" {
+  value = aws_security_group.public-sg.id
 }
 
-
-
+output "priv-secgrp-id" {
+  value = aws_security_group.private-sg.id
+}
 
 # ==============================================
 #
