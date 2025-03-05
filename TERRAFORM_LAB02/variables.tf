@@ -17,10 +17,6 @@
 #
 # ==============================================
 
-locals {
-  default = terraform.workspace
-}
-
 variable "aws_region" {
   description = "The AWS region to deploy resources"
   type        = string
@@ -47,6 +43,13 @@ variable "subnets" {
   }))
 }
 
+variable "instances" {
+  type = list(object({
+    name   = string
+    subnet = string
+    type   = string
+  }))
+}
 
 variable "security_rules" {
   description = "List of security rules"
@@ -59,13 +62,6 @@ variable "security_rules" {
   }))
 }
 
-variable "instances" {
-  type = list(object({
-    name   = string
-    subnet = string
-    type   = string
-  }))
-}
 
 
 # ==============================================

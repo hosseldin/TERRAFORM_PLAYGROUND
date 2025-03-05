@@ -21,18 +21,30 @@ aws_region = "us-east-1"
 vpc_name   = "hosa-vpc-terraform"
 vpc_cidr   = "10.0.0.0/16"
 
-subnet_configs = {
-  "public-subnet-1" = {
+subnets = [
+  {
+    name       = "hosa-PubSubnet-1"
+    cidr_block = "10.0.0.0/24"
+    type       = "public"
+    az         = "a"
+  },
+  {
+    name       = "hosa-PubSubnet-2"
     cidr_block = "10.0.1.0/24"
-    az         = "us-east-1a"
-    is_public  = true
+    type       = "public"
+    az         = "a"
   }
-  "private-subnet-1" = {
-    cidr_block = "10.0.2.0/24"
-    az         = "us-east-1a"
-    is_public  = false
+]
+
+instances = [
+  {
+    name          = "app-server-1"
+    ami           = "ami-04b4f1a9cf54c11d0"
+    instance_type = "t2.micro"
+    subnet_name   = "hosa-PubSubnet-1"
+    security_name = "web-sg"
   }
-}
+]
 
 security_rules = [
   {
@@ -50,52 +62,6 @@ security_rules = [
     cidr_blocks = ["0.0.0.0/0"]
   }
 ]
-
-instances = [
-  {
-    name          = "app-server-1"
-    ami           = "ami-04b4f1a9cf54c11d0"
-    instance_type = "t2.micro"
-    subnet_name   = "public-subnet-1"
-    security_name = "web-sg"
-  }
-]
-
-
-ingress_rules = [
-  {
-    name        = "allow-all-ingress"
-    description = "Allow all inbound traffic"
-    port        = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-]
-
-egress_rules = [
-  {
-    name        = "allow-all-egress"
-    description = "Allow all outbound traffic"
-    port        = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-]
-
-
-
-# instances = [
-#   {
-#     name          = "app-server-1",
-#     ami           = "ami-04b4f1a9cf54c11d0",
-#     instance_type = "t2.micro"
-#   },
-#   {
-#     name          = "app-server-2",
-#     ami           = "ami-04b4f1a9cf54c11d0",
-#     instance_type = "t2.micro"
-#   }
-# ]
 
 
 # ==============================================

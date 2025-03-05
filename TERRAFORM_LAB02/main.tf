@@ -17,6 +17,7 @@
 #
 # ==============================================
 
+
 terraform {
   required_providers {
     aws = {
@@ -40,12 +41,12 @@ module "security_group" {
 }
 
 module "instances" {
-  source = "./modules/instance"
-
+  source         = "./modules/instance"
+  instances      = var.instances
+  subnets        = module.vpc.subnets
+  security_group = module.security_group.security_group_id
+  ami            = data.aws_ami.ubuntu
 }
-
-
-
 
 
 # ==============================================
