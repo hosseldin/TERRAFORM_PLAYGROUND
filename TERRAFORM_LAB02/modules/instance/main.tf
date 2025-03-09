@@ -17,7 +17,7 @@
 #
 # ==============================================
 
-resource "aws_instance" "instance" {
+resource "aws_instance" "instances" {
   count = length(var.instances)
 
   ami           = var.ami.id

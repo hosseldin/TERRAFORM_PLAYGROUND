@@ -20,10 +20,10 @@
 
 variable "instances" {
   type = list(object({
-    name              = string
-    instance_type     = string
-    subnet_id         = string
-    security_group_id = string
+    name          = string
+    subnet        = string
+    instance_type = string
+    security      = string
   }))
 }
 
