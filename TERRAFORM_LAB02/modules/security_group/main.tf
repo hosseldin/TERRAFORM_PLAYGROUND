@@ -28,9 +28,10 @@ resource "aws_security_group" "sg" {
   }
 }
 
-resource "aws_vpc_security_group_ingress_rule" "ingress" {
+resource "aws_security_group_rule" "ingress" {
   for_each          = { for sg in var.security_groups : sg.name => sg }
   security_group_id = aws_security_group.sg[each.key].id
+  type              = "ingress"
 
   dynamic "ingress_rule" {
     for_each = each.value.ingress_rules

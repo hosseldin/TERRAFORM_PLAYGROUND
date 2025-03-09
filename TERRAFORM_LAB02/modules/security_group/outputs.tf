@@ -17,12 +17,8 @@
 #
 # ==============================================
 
-output "pub-secgrp-id" {
-  value = aws_security_group.public-sg.id
-}
-
-output "priv-secgrp-id" {
-  value = aws_security_group.private-sg.id
+output "security-group-id" {
+  value = aws_security_group.sg.id
 }
 
 # ==============================================
