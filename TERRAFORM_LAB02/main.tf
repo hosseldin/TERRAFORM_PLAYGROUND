@@ -37,8 +37,9 @@ module "vpc" {
 }
 
 module "security_group" {
-  source = "./modules/security_group"
-  vpc_id = module.vpc.vpc_id
+  source          = "./modules/security_group"
+  vpc_id          = module.vpc.vpc_id
+  security_groups = var.security_groups
 }
 
 module "instances" {

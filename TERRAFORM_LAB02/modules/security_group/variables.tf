@@ -27,7 +27,6 @@ variable "security_groups" {
   type = list(object({
     name        = string
     description = string
-    vpc_id      = string
     ingress_rules = list(object({
       from_port   = number
       to_port     = number

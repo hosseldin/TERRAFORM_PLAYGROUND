@@ -45,6 +45,35 @@ instances = [
   }
 ]
 
+security_groups = [
+  {
+    name        = "public-sg"
+    description = "Allow SSH from anywhere"
+    vpc_id      = "vpc-12345678"
+    ingress_rules = [
+      {
+        from_port   = 22
+        to_port     = 22
+        protocol    = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+      }
+    ]
+  },
+  {
+    name        = "private-sg"
+    description = "Allow SSH only within VPC"
+    ingress_rules = [
+      {
+        from_port   = 22
+        to_port     = 22
+        protocol    = "tcp"
+        cidr_blocks = ["10.0.0.0/16"]
+      }
+    ]
+  }
+]
+
+
 
 # ==============================================
 #
