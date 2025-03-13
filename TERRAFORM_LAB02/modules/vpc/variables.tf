@@ -17,6 +17,11 @@
 #
 # ==============================================
 
+variable "aws_region" {
+  description = "The AWS region to deploy resources"
+  type        = string
+}
+
 
 variable "subnets" {
   type = list(object({

@@ -27,14 +27,20 @@ variable "security_groups" {
   type = list(object({
     name        = string
     description = string
-    ingress_rules = list(object({
-      from_port   = number
-      to_port     = number
-      protocol    = string
-      cidr_blocks = list(string)
-    }))
   }))
 }
+
+variable "ingress_rules" {
+  description = "List of ingress rules"
+  type = list(object({
+    security_group_name = string
+    from_port           = number
+    to_port             = number
+    protocol            = string
+    cidr_blocks         = list(string)
+  }))
+}
+
 
 # ==============================================
 #

@@ -17,6 +17,8 @@
 #
 # ==============================================
 
+
+# ==============================================
 resource "aws_security_group" "sg" {
   for_each    = { for sg in var.security_groups : sg.name => sg }
   vpc_id      = each.value.vpc_id
@@ -28,21 +30,17 @@ resource "aws_security_group" "sg" {
   }
 }
 
-resource "aws_security_group_rule" "ingress" {
-  for_each          = { for sg in var.security_groups : sg.name => sg }
-  security_group_id = aws_security_group.sg[each.key].id
-  type              = "ingress"
+# ==============================================
+resource "aws_vpc_security_group_ingress_rule" "ingress" {
+  for_each          = { for rule in var.ingress_rules : "${rule.security_group_name}-${rule.from_port}-${rule.to_port}" => rule }
+  security_group_id = aws_security_group.sg[each.value.security_group_name].id
 
-  dynamic "ingress_rule" {
-    for_each = each.value.ingress_rules
-    content {
-      from_port   = ingress_rule.value.from_port
-      to_port     = ingress_rule.value.to_port
-      ip_protocol = ingress_rule.value.protocol
-      cidr_ipv4   = ingress_rule.value.cidr_blocks[0] # Assuming single CIDR
-    }
-  }
+  from_port   = each.value.from_port
+  to_port     = each.value.to_port
+  ip_protocol = each.value.protocol
+  cidr_ipv4   = each.value.cidr_blocks[0] # Assuming a single CIDR block per rule
 }
+
 
 
 

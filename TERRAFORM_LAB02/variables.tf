@@ -52,19 +52,31 @@ variable "instances" {
   }))
 }
 
+
+variable "vpc_id" {
+  type        = string
+  description = "VPC ID to associate the security group with"
+}
+
 variable "security_groups" {
-  description = "List of security groups with rules"
+  description = "List of security groups"
   type = list(object({
     name        = string
     description = string
-    ingress_rules = list(object({
-      from_port   = number
-      to_port     = number
-      protocol    = string
-      cidr_blocks = list(string)
-    }))
   }))
 }
+
+variable "ingress_rules" {
+  description = "List of ingress rules for security groups"
+  type = list(object({
+    security_group_name = string
+    from_port           = number
+    to_port             = number
+    protocol            = string
+    cidr_blocks         = list(string)
+  }))
+}
+
 
 
 data "aws_ami" "ubuntu" {
