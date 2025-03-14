@@ -17,6 +17,19 @@
 #
 # ==============================================
 
+
+variable "vpc_name" {
+  description = "Name of the VPC"
+  type        = string
+}
+
+# Variable for the VPC
+variable "vpc_cidr" {
+  description = "CIDR block for the VPC"
+  type        = string
+}
+
+
 variable "aws_region" {
   description = "The AWS region to deploy resources"
   type        = string

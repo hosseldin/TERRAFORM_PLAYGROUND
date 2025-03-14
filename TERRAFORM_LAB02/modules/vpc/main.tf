@@ -24,9 +24,17 @@ resource "aws_vpc" "default" {
   }
 }
 
+resource "aws_vpc" "this" {
+  cidr_block = var.vpc_cidr
+  tags = {
+    Name = var.vpc_name
+  }
+}
+
+
 resource "aws_subnet" "subnets" {
   for_each                = { for subnet in var.subnets : subnet.name => subnet }
-  vpc_id                  = aws_vpc.main.id
+  vpc_id                  = aws_vpc.this.id
   cidr_block              = each.value.cidr_block
   map_public_ip_on_launch = each.value.type == "public" ? true : false
   availability_zone       = "${var.aws_region}${each.value.az}"
@@ -35,7 +43,7 @@ resource "aws_subnet" "subnets" {
 }
 
 resource "aws_internet_gateway" "gw" {
-  vpc_id = aws_vpc.main.id
+  vpc_id = aws_vpc.this.id
 
   tags = {
     Name = "Internet Gateway"
@@ -43,7 +51,7 @@ resource "aws_internet_gateway" "gw" {
 }
 
 resource "aws_route_table" "public_rt" {
-  vpc_id = aws_vpc.main.id
+  vpc_id = aws_vpc.this.id
 
   route {
     cidr_block = "0.0.0.0/0"
@@ -55,7 +63,7 @@ resource "aws_route_table" "public_rt" {
 }
 
 resource "aws_route_table" "private_route" {
-  vpc_id = aws_vpc.main.id
+  vpc_id = aws_vpc.this.id
 
   tags = {
     Name = "hosa-private-rt"

@@ -18,7 +18,8 @@
 # ==============================================
 
 output "security-group-id" {
-  value = aws_security_group.sg.id
+  value = { for sg in aws_security_group.sg : sg.name => sg.id }
+  # value = aws_security_group.sg.id
 }
 
 # ==============================================

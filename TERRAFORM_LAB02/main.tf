@@ -31,17 +31,19 @@ provider "aws" {
   region = var.aws_region
 }
 
-# module "vpc" {
-#   source     = "./modules/vpc"
-#   subnets    = var.subnets
-#   aws_region = var.aws_region
-# }
+module "vpc" {
+  source     = "./modules/vpc"
+  subnets    = var.subnets
+  aws_region = var.aws_region
+  vpc_cidr   = var.vpc_cidr
+  vpc_name   = var.vpc_name
+}
 
 module "security_group" {
   source = "./modules/security_group"
 
-  # vpc_id          = module.vpc.vpc_id
-  vpc_id          = data.aws_vpc.selected.id
+  vpc_id = module.vpc.vpc_id
+  # vpc_id          = data.aws_vpc.selected.id
   security_groups = var.security_groups
   ingress_rules   = var.ingress_rules
 }
@@ -49,18 +51,18 @@ module "security_group" {
 module "instances" {
   source    = "./modules/instance"
   instances = var.instances
-  # subnets        = module.vpc.subnets
-  subnets        = data.aws_vpc.selected
-  security_group = module.security_group.pub-secgrp-id
+  subnets   = module.vpc.subnets
+  # subnets        = data.aws_vpc.selected
+  security_group = module.security_group.security-group-id
   ami            = data.aws_ami.ubuntu
 }
 
-data "aws_vpc" "selected" {
-  filter {
-    name   = "tag:Name"
-    values = [var.vpc_name]
-  }
-}
+# data "aws_vpc" "selected" {
+#   filter {
+#     name   = "tag:Name"
+#     values = [var.vpc_name]
+#   }
+# }
 
 # ==============================================
 #

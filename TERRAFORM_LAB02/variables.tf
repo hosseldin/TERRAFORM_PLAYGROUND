@@ -45,18 +45,18 @@ variable "subnets" {
 
 variable "instances" {
   type = list(object({
-    name          = string
-    subnet        = string
-    instance_type = string
-    security      = string
+    name           = string
+    subnet_name    = string
+    instance_type  = string
+    security_group = string
   }))
 }
 
 
-variable "vpc_id" {
-  type        = string
-  description = "VPC ID to associate the security group with"
-}
+# variable "vpc_id" {
+#   type        = string
+#   description = "VPC ID to associate the security group with"
+# }
 
 variable "security_groups" {
   description = "List of security groups"
@@ -81,17 +81,17 @@ variable "ingress_rules" {
 
 data "aws_ami" "ubuntu" {
   most_recent = true
-  owners      = ["ubuntu"]
+  owners      = ["amazon"]
 
   filter {
     name   = "name"
-    values = ["ubuntu-ami-*-x86_64"]
+    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
   }
 
-  filter {
-    name   = "root-device-type"
-    values = ["ebs"]
-  }
+  # filter {
+  #   name   = "root-device-type"
+  #   values = ["ebs"]
+  # }
 
   filter {
     name   = "virtualization-type"

@@ -39,9 +39,10 @@ subnets = [
 
 instances = [
   {
-    name          = "app-server-1"
-    subnet_name   = "hosa-PubSubnet-1"
-    instance_type = "t2.micro"
+    name           = "app-server-1"
+    subnet_name    = "hosa-PubSubnet-1"
+    instance_type  = "t2.micro"
+    security_group = "public-sg"
 
   }
 ]
