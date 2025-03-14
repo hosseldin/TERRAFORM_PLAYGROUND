@@ -42,8 +42,8 @@ module "vpc" {
 module "security_group" {
   source = "./modules/security_group"
 
-  vpc_id = module.vpc.vpc_id
-  # vpc_id          = data.aws_vpc.selected.id
+  # vpc_id = module.vpc.vpc_id
+  vpc_id          = data.aws_vpc.selected.id
   security_groups = var.security_groups
   ingress_rules   = var.ingress_rules
 }
@@ -57,12 +57,12 @@ module "instances" {
   ami            = data.aws_ami.ubuntu
 }
 
-# data "aws_vpc" "selected" {
-#   filter {
-#     name   = "tag:Name"
-#     values = [var.vpc_name]
-#   }
-# }
+data "aws_vpc" "selected" {
+  filter {
+    name   = "tag:Name"
+    values = [var.vpc_name]
+  }
+}
 
 # ==============================================
 #
