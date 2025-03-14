@@ -17,12 +17,12 @@
 #
 # ==============================================
 
-resource "aws_vpc" "default" {
-  cidr_block = "10.0.0.0/16"
-  tags = {
-    Name = "default-vpc"
-  }
-}
+# resource "aws_vpc" "default" {
+#   cidr_block = "10.0.0.0/16"
+#   tags = {
+#     Name = "default-vpc"
+#   }
+# }
 
 resource "aws_vpc" "this" {
   cidr_block = var.vpc_cidr
@@ -71,7 +71,7 @@ resource "aws_route_table" "private_route" {
 }
 
 resource "aws_route_table_association" "public_assoc" {
-  for_each       = { for k, v in var.subnets : k => v if v.is_public }
+  for_each       = { for k, v in var.subnets : k => v if v.type == "public" }
   subnet_id      = aws_subnet.subnets[each.key].id
   route_table_id = aws_route_table.public_rt.id
 }

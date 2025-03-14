@@ -25,7 +25,7 @@ resource "aws_instance" "instances" {
   subnet_id     = var.subnets["${var.instances[count.index].subnet_name}"].id
 
   vpc_security_group_ids = [
-    var.security_group[var.instances[count.index].security_group].id
+    var.security_group["${var.instances[count.index].security_group}"]
 
     #   var.instances[count.index].type == "public"
     #   ? aws_security_group.public-sg.id
