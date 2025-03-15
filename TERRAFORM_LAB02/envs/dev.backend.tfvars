@@ -5,8 +5,8 @@
 # ==============================================
 #
 # Created By: Hossam Mahmoud
-# Date: 2025-03-03
-# Filename: backend.tf
+# Date: 2025-03-15
+# Filename: dev.backend.tfvars
 # Description: 
 # Version: 1.0.0
 # Copyright (c) 2025 Hossam. All rights reserved.
@@ -17,7 +17,6 @@
 #
 # ==============================================
 
-# Here I'm 
 terraform {
   backend "s3" {
     bucket = "hosa-terraform-state"
