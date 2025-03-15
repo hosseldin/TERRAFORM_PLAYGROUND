@@ -43,6 +43,21 @@ variable "subnets" {
   }))
 }
 
+variable "igw_name" {
+  type        = string
+  description = "Name of the Internet Gateway"
+}
+
+variable "public_rt_name" {
+  type        = string
+  description = "Name of the Public Route Table"
+}
+
+variable "private_rt_name" {
+  type        = string
+  description = "Name of the Private Route Table"
+}
+
 variable "instances" {
   type = list(object({
     name           = string
