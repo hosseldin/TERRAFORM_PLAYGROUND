@@ -32,11 +32,14 @@ provider "aws" {
 }
 
 module "vpc" {
-  source     = "./modules/vpc"
-  subnets    = var.subnets
-  aws_region = var.aws_region
-  vpc_cidr   = var.vpc_cidr
-  vpc_name   = var.vpc_name
+  source          = "./modules/vpc"
+  igw_name        = var.igw_name
+  public_rt_name  = var.public_rt_name
+  private_rt_name = var.private_rt_name
+  subnets         = var.subnets
+  aws_region      = var.aws_region
+  vpc_cidr        = var.vpc_cidr
+  vpc_name        = var.vpc_name
 }
 
 module "security_group" {
