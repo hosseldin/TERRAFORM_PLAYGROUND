@@ -46,7 +46,7 @@ resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.this.id
 
   tags = {
-    Name = "Internet Gateway"
+    Name = var.igw_name
   }
 }
 
@@ -58,7 +58,7 @@ resource "aws_route_table" "public_rt" {
     gateway_id = aws_internet_gateway.gw.id
   }
   tags = {
-    Name = "hosa-public-rt"
+    Name = var.public_rt_name
   }
 }
 
@@ -66,7 +66,7 @@ resource "aws_route_table" "private_route" {
   vpc_id = aws_vpc.this.id
 
   tags = {
-    Name = "hosa-private-rt"
+    Name = var.private_rt_name
   }
 }
 
