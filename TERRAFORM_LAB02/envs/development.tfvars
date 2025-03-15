@@ -21,6 +21,10 @@ aws_region = "us-east-1"
 vpc_name   = "hosa-vpc-terraform"
 vpc_cidr   = "10.0.0.0/16"
 
+igw_name        = hosa-igw-01
+public_rt_name  = hosa-public-rt
+private_rt_name = hosa-private-rt
+
 subnets = [
   {
     name       = "hosa-PubSubnet-1"
