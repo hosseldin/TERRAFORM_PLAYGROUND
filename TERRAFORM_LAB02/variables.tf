@@ -92,7 +92,15 @@ variable "ingress_rules" {
   }))
 }
 
-
+variable "egress_rules" {
+  type = list(object({
+    security_group_name = string
+    from_port           = number
+    to_port             = number
+    protocol            = string
+    cidr_blocks         = list(string)
+  }))
+}
 
 data "aws_ami" "ubuntu" {
   most_recent = true
