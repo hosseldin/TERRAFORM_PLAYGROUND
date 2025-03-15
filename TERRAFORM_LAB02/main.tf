@@ -49,6 +49,7 @@ module "security_group" {
   # vpc_id          = data.aws_vpc.selected.id
   security_groups = var.security_groups
   ingress_rules   = var.ingress_rules
+  egress_rules    = var.egress_rules
 }
 
 module "instances" {
