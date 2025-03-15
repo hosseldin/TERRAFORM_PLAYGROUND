@@ -17,14 +17,11 @@
 #
 # ==============================================
 
-terraform {
-  backend "s3" {
-    bucket = "hosa-terraform-state"
-    region = "us-east-1"
-    key    = "development/terraform.tfstate"
-    # use_lockfile = "true"
-  }
-}
+
+bucket = "hosa-terraform-state"
+region = "us-east-1"
+key    = "development/terraform.tfstate"
+
 
 # ==============================================
 #
