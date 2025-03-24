@@ -102,8 +102,8 @@ egress_rules = [
   },
   {
     security_group_name = "prometheus-sg"
-    from_port           = 9100
-    to_port             = 9100
+    from_port           = 80
+    to_port             = 80
     protocol            = "tcp"
     cidr_blocks         = ["0.0.0.0/0"]
   }
