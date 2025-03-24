@@ -25,11 +25,9 @@ resource "aws_instance" "instances" {
   subnet_id     = var.subnets["${var.instances[count.index].subnet_name}"].id
 
   vpc_security_group_ids = [
-    var.security_group["${var.instances[count.index].security_group}"]
+    for sg in var.instances[count.index].security_groups : var.security_group[sg]
+    # var.security_group["${var.instances[count.index].security_group}"]
 
-    #   var.instances[count.index].type == "public"
-    #   ? aws_security_group.public-sg.id
-    # : aws_security_group.private-sg.id
   ]
   tags = {
     Name = var.instances[count.index].name

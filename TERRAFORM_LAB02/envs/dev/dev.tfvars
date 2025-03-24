@@ -46,8 +46,7 @@ instances = [
     name           = "app-server-1"
     subnet_name    = "hosa-PubSubnet-1"
     instance_type  = "t2.micro"
-    security_group = "public-sg"
-
+    security_group = ["public-sg", "prometheus-sg"]
   }
 ]
 
@@ -58,9 +57,13 @@ security_groups = [
     description = "Allow public access"
   },
   {
-    name        = "private-sg"
-    description = "Allow private access"
+    name        = "prometheus-sg"
+    description = "Allow public access"
   }
+  # {
+  #   name        = "private-sg"
+  #   description = "Allow private access"
+  # }
 ]
 
 
@@ -94,6 +97,13 @@ egress_rules = [
     security_group_name = "public-sg"
     from_port           = 80
     to_port             = 80
+    protocol            = "tcp"
+    cidr_blocks         = ["0.0.0.0/0"]
+  },
+  {
+    security_group_name = "prometheus-sg"
+    from_port           = 9100
+    to_port             = 9100
     protocol            = "tcp"
     cidr_blocks         = ["0.0.0.0/0"]
   }
