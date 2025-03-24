@@ -25,7 +25,7 @@ resource "aws_instance" "instances" {
   subnet_id     = var.subnets["${var.instances[count.index].subnet_name}"].id
 
   vpc_security_group_ids = [
-    for sg in var.instances[count.index].security_groups : var.security_group[sg]
+    for sg in var.instances[count.index].security_group : var.security_group[sg]
     # var.security_group["${var.instances[count.index].security_group}"]
 
   ]
