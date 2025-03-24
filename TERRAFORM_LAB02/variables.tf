@@ -63,7 +63,7 @@ variable "instances" {
     name           = string
     subnet_name    = string
     instance_type  = string
-    security_group = string
+    security_group = list(string)
   }))
 }
 
