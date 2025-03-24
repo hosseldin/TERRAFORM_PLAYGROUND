@@ -31,7 +31,7 @@ subnets = [
     cidr_block = "10.0.0.0/24"
     type       = "public"
     az         = "a"
-  },
+  }
   # {
   #   name       = "hosa-PubSubnet-2"
   #   cidr_block = "10.0.1.0/24"
@@ -46,10 +46,11 @@ instances = [
     name           = "hosa-server-1"
     subnet_name    = "hosa-PubSubnet-1"
     instance_type  = "t2.micro"
-    security_group = ["public-sg", "prometheus-sg"]
+    security_group = ["public-sg"]
   }
 ]
 
+# , "prometheus-sg"
 
 security_groups = [
   {
