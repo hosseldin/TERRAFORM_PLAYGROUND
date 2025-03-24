@@ -32,12 +32,12 @@ subnets = [
     type       = "public"
     az         = "a"
   },
-  {
-    name       = "hosa-PubSubnet-2"
-    cidr_block = "10.0.1.0/24"
-    type       = "public"
-    az         = "a"
-  }
+  # {
+  #   name       = "hosa-PubSubnet-2"
+  #   cidr_block = "10.0.1.0/24"
+  #   type       = "public"
+  #   az         = "a"
+  # }
 ]
 
 
@@ -73,12 +73,19 @@ ingress_rules = [
     cidr_blocks         = ["0.0.0.0/0"]
   },
   {
-    security_group_name = "private-sg"
-    from_port           = 22
-    to_port             = 22
+    security_group_name = "prometheus-sg"
+    from_port           = 9100
+    to_port             = 9100
     protocol            = "tcp"
-    cidr_blocks         = ["10.0.0.0/16"]
+    cidr_blocks         = ["217.53.81.238/32"]
   }
+  # {
+  #   security_group_name = "private-sg"
+  #   from_port           = 22
+  #   to_port             = 22
+  #   protocol            = "tcp"
+  #   cidr_blocks         = ["10.0.0.0/16"]
+  # }
 ]
 
 
